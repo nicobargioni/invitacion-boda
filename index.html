@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nico & Yaki — 4 de Septiembre 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --gold: #b89b6a;
+      --cream: #f5f0e8;
+      --dark: #2c2c2c;
+      --light: #fdfaf4;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--light);
+      color: var(--dark);
+      font-family: 'Lato', sans-serif;
+      font-weight: 300;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(160deg, #1a1a2e 0%, #2d1b0e 60%, #4a2c0a 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 100%, rgba(184,155,106,0.15) 0%, transparent 70%);
+    }
+    .hero-photo {
+      width: min(380px, 85vw);
+      position: relative;
+      z-index: 2;
+      filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5));
+    }
+    .hero-text {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      text-align: center;
+      padding-top: 3rem;
+      z-index: 2;
+    }
+    .hero-pre {
+      color: var(--gold);
+      letter-spacing: 0.3em;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      font-weight: 400;
+      margin-bottom: 0.8rem;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 10vw, 5.5rem);
+      color: #fff;
+      line-height: 1;
+      font-weight: 400;
+    }
+    .hero-title span {
+      color: var(--gold);
+      font-style: italic;
+    }
+    .hero-date {
+      color: rgba(255,255,255,0.7);
+      font-size: 0.9rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-top: 1rem;
+    }
+
+    /* COUNTDOWN */
+    .countdown-section {
+      background: var(--dark);
+      padding: 2.5rem 1rem;
+      text-align: center;
+    }
+    .countdown-label {
+      color: var(--gold);
+      letter-spacing: 0.3em;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+    }
+    .countdown-grid {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+    }
+    .countdown-item { text-align: center; }
+    .countdown-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      color: #fff;
+      line-height: 1;
+    }
+    .countdown-unit {
+      color: rgba(255,255,255,0.4);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-top: 0.3rem;
+    }
+
+    /* SECTIONS */
+    .section {
+      padding: 4rem 1.5rem;
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .section-icon {
+      font-size: 2rem;
+      margin-bottom: 0.8rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: var(--dark);
+      margin-bottom: 1.2rem;
+    }
+    .section-body {
+      color: #555;
+      line-height: 1.8;
+      font-size: 1rem;
+    }
+    .section-body strong {
+      color: var(--dark);
+      font-weight: 700;
+    }
+    .map-link {
+      display: inline-block;
+      margin-top: 1rem;
+      color: var(--gold);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      border-bottom: 1px solid var(--gold);
+      padding-bottom: 2px;
+    }
+    .divider {
+      width: 60px;
+      height: 1px;
+      background: var(--gold);
+      margin: 0 auto;
+    }
+    .divider-section {
+      padding: 0;
+    }
+
+    /* DRESS CODE */
+    .dress-section {
+      background: var(--cream);
+      padding: 4rem 1.5rem;
+      text-align: center;
+    }
+
+    /* CONFIRMACION */
+    .confirm-section {
+      background: var(--dark);
+      padding: 4rem 1.5rem;
+      text-align: center;
+      color: #fff;
+    }
+    .confirm-section .section-title { color: #fff; }
+    .confirm-section .section-body { color: rgba(255,255,255,0.65); }
+    .confirm-btn {
+      display: inline-block;
+      margin-top: 2rem;
+      background: var(--gold);
+      color: #fff;
+      padding: 1rem 3rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 700;
+      transition: opacity 0.2s;
+    }
+    .confirm-btn:hover { opacity: 0.85; }
+
+    /* TARJETA */
+    .tarjeta-section {
+      background: var(--cream);
+      padding: 3rem 1.5rem;
+      text-align: center;
+    }
+    .tarjeta-grid {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .tarjeta-item {
+      background: #fff;
+      border-radius: 12px;
+      padding: 1.5rem 2rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .tarjeta-periodo {
+      font-size: 0.75rem;
+      color: #999;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .tarjeta-precio {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: var(--dark);
+      margin-top: 0.3rem;
+    }
+
+    /* REGALOS */
+    .regalo-btn {
+      display: inline-block;
+      margin-top: 1.5rem;
+      border: 1.5px solid var(--gold);
+      color: var(--gold);
+      padding: 0.8rem 2.5rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      cursor: pointer;
+      background: none;
+      transition: all 0.2s;
+    }
+    .regalo-btn:hover { background: var(--gold); color: #fff; }
+
+    /* MODAL */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal {
+      background: #fff;
+      border-radius: 20px;
+      padding: 2.5rem;
+      max-width: 340px;
+      width: 90%;
+      text-align: center;
+      position: relative;
+    }
+    .modal-close {
+      position: absolute;
+      top: 1rem; right: 1rem;
+      background: none; border: none;
+      font-size: 1.4rem; cursor: pointer; color: #aaa;
+    }
+    .modal-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .modal-body { color: #555; line-height: 1.7; font-size: 0.95rem; }
+    .alias {
+      display: inline-block;
+      margin-top: 1rem;
+      background: var(--cream);
+      padding: 0.8rem 1.5rem;
+      border-radius: 10px;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--dark);
+      letter-spacing: 0.05em;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--dark);
+      color: rgba(255,255,255,0.3);
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <p class="hero-pre">Los invitamos a celebrar</p>
+    <h1 class="hero-title">Nico <span>&</span> Yaki</h1>
+    <p class="hero-date">4 · Septiembre · 2026</p>
+  </div>
+  <img src="familia.png" alt="Nico, Yaki y Fran" class="hero-photo" />
+</section>
+
+<!-- COUNTDOWN -->
+<div class="countdown-section">
+  <p class="countdown-label">Faltan</p>
+  <div class="countdown-grid">
+    <div class="countdown-item">
+      <div class="countdown-num" id="cd-days">--</div>
+      <div class="countdown-unit">días</div>
+    </div>
+    <div class="countdown-item">
+      <div class="countdown-num" id="cd-hours">--</div>
+      <div class="countdown-unit">horas</div>
+    </div>
+    <div class="countdown-item">
+      <div class="countdown-num" id="cd-mins">--</div>
+      <div class="countdown-unit">minutos</div>
+    </div>
+    <div class="countdown-item">
+      <div class="countdown-num" id="cd-secs">--</div>
+      <div class="countdown-unit">segundos</div>
+    </div>
+  </div>
+</div>
+
+<!-- IGLESIA -->
+<div class="section">
+  <div class="section-icon">⛪</div>
+  <h2 class="section-title">Ceremonia Religiosa</h2>
+  <div class="section-body">
+    <strong>Convento San Alfonso</strong><br />
+    San Clemente 1900 esq. San Alfonso<br />
+    Villa Allende, Córdoba<br />
+    <em style="color:#aaa;">Hora: a confirmar</em>
+    <br />
+    <a class="map-link" href="https://maps.google.com/?q=San+Clemente+1900+esq.+San+Alfonso,+Villa+Allende,+Córdoba" target="_blank">📍 Ver en Google Maps</a>
+  </div>
+</div>
+
+<div class="divider-section"><div class="divider"></div></div>
+
+<!-- FIESTA -->
+<div class="section">
+  <div class="section-icon">🥂</div>
+  <h2 class="section-title">Recepción</h2>
+  <div class="section-body">
+    <strong>Bolgheri Eventos</strong><br />
+    Santiago Derqui 703<br />
+    Villa Allende, Córdoba<br />
+    <em style="color:#aaa;">Hora: a confirmar</em>
+    <br />
+    <a class="map-link" href="https://maps.google.com/?q=Santiago+Derqui+703,+Villa+Allende,+Córdoba" target="_blank">📍 Ver en Google Maps</a>
+  </div>
+</div>
+
+<!-- DRESS CODE -->
+<div class="dress-section">
+  <div class="section-icon">👔</div>
+  <h2 class="section-title" style="font-family:'Playfair Display',serif;font-size:1.8rem;margin-bottom:1rem;">Dress Code</h2>
+  <p style="color:#555;font-size:1.1rem;letter-spacing:0.05em;">Elegante sport</p>
+</div>
+
+<!-- TARJETA -->
+<div class="tarjeta-section">
+  <div class="section-icon">💳</div>
+  <h2 class="section-title" style="font-family:'Playfair Display',serif;font-size:1.8rem;margin-bottom:0.5rem;">Valor tarjeta</h2>
+  <div class="tarjeta-grid">
+    <div class="tarjeta-item">
+      <div class="tarjeta-periodo">Hasta julio 2026</div>
+      <div class="tarjeta-precio">$130.000</div>
+    </div>
+    <div class="tarjeta-item">
+      <div class="tarjeta-periodo">Desde agosto 2026</div>
+      <div class="tarjeta-precio">$160.000</div>
+    </div>
+  </div>
+</div>
+
+<!-- REGALOS -->
+<div class="section">
+  <div class="section-icon">🎁</div>
+  <h2 class="section-title">Regalos</h2>
+  <p class="section-body">Tu presencia es lo más importante para nosotros.<br />Si querés hacernos un regalo, te dejamos nuestro dato.</p>
+  <button class="regalo-btn" onclick="document.getElementById('modal-regalo').classList.add('active')">Ver alias</button>
+</div>
+
+<!-- CONFIRMACION -->
+<div class="confirm-section">
+  <div class="section-icon">✅</div>
+  <h2 class="section-title">Confirmá tu asistencia</h2>
+  <p class="section-body">Confirmá antes del <strong style="color:#fff;">30 de abril de 2026</strong></p>
+  <a href="#" class="confirm-btn">Confirmar</a>
+</div>
+
+<!-- FOOTER -->
+<footer>NICO & YAKI · 4 · IX · 2026</footer>
+
+<!-- MODAL REGALOS -->
+<div class="modal-overlay" id="modal-regalo" onclick="if(event.target===this)this.classList.remove('active')">
+  <div class="modal">
+    <button class="modal-close" onclick="document.getElementById('modal-regalo').classList.remove('active')">✕</button>
+    <div class="modal-title">🎁 Regalos</div>
+    <div class="modal-body">
+      Tu presencia es lo más importante.<br /><br />
+      Si querés hacernos un regalo, podés hacerlo vía MercadoPago:
+      <div class="alias">nicobargioni</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Countdown
+  const wedding = new Date('2026-09-04T20:00:00-03:00');
+  function update() {
+    const diff = wedding - new Date();
+    if (diff <= 0) return;
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    document.getElementById('cd-days').textContent = String(d).padStart(2,'0');
+    document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-mins').textContent = String(m).padStart(2,'0');
+    document.getElementById('cd-secs').textContent = String(s).padStart(2,'0');
+  }
+  update();
+  setInterval(update, 1000);
+</script>
+</body>
+</html>
