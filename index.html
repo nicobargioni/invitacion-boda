@@ -243,7 +243,7 @@
       background: linear-gradient(175deg, #ede4d2 0%, #f5f0e8 45%, #e8ddc8 100%);
       border-radius: 3px 3px 10px 10px;
       z-index: 5;
-      transition: opacity 0.5s ease 0.3s;
+      transition: opacity 0.8s ease 0.8s;
     }
     /* V-fold lines on the front */
     .env-front-cover::before {
@@ -270,10 +270,10 @@
       transform-origin: top center;
       transform-style: preserve-3d;
       z-index: 10;
-      transition: transform 0.95s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: transform 2s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .env-flap-wrapper.open {
-      transform: rotateX(-185deg);
+      transform: rotateX(-160deg);
     }
 
     /* Front of flap (cream, visible when closed) */
@@ -971,28 +971,32 @@
     // Hide button
     btn.classList.add('hide');
 
-    // Step 1 — open flap + reveal front cover (0ms)
+    // Step 1 — open flap (0ms), sparkles after a beat
     flap.classList.add('open');
-    document.getElementById('env-front-cover').classList.add('hide');
-    createSparkles();
+    setTimeout(() => createSparkles(), 800);
 
-    // Step 2 — card rises (750ms)
+    // Step 2 — hide front cover to reveal card (1.5s)
+    setTimeout(() => {
+      document.getElementById('env-front-cover').classList.add('hide');
+    }, 1500);
+
+    // Step 3 — card rises (2.5s)
     setTimeout(() => {
       card.classList.add('rise');
-    }, 750);
+    }, 2500);
 
-    // Step 3 — fade out overlay (1700ms)
+    // Step 4 — fade out overlay (4s)
     setTimeout(() => {
       overlay.classList.add('fade-out');
-    }, 1700);
+    }, 4000);
 
-    // Step 4 — reveal main content (2700ms)
+    // Step 5 — reveal main content (5s)
     setTimeout(() => {
       overlay.style.display = 'none';
       document.getElementById('main-content').style.display = 'block';
       window.scrollTo({ top: 0, behavior: 'instant' });
       updateCountdown(); // refresh immediately
-    }, 2700);
+    }, 5000);
   }
 
   /* Fallback: if JS fails or user has no-JS, show content */
@@ -1004,7 +1008,7 @@
         overlay.style.display = 'none';
         document.getElementById('main-content').style.display = 'block';
       }
-    }, 10000);
+    }, 15000);
   });
 </script>
 </body>
