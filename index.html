@@ -236,6 +236,30 @@
       margin-top: 0.1rem;
     }
 
+    /* ── Front cover (hides card when closed) ── */
+    .env-front-cover {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(175deg, #ede4d2 0%, #f5f0e8 45%, #e8ddc8 100%);
+      border-radius: 3px 3px 10px 10px;
+      z-index: 5;
+      transition: opacity 0.5s ease 0.3s;
+    }
+    /* V-fold lines on the front */
+    .env-front-cover::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to top right, transparent 49.4%, rgba(0,0,0,0.05) 49.5%, rgba(0,0,0,0.05) 50.5%, transparent 51%) 0 0 / 100% 100% no-repeat,
+        linear-gradient(to top left,  transparent 49.4%, rgba(0,0,0,0.05) 49.5%, rgba(0,0,0,0.05) 50.5%, transparent 51%) 0 0 / 100% 100% no-repeat;
+      pointer-events: none;
+    }
+    .env-front-cover.hide {
+      opacity: 0;
+      pointer-events: none;
+    }
+
     /* ── Flap (3D fold) ───────────────────────── */
     .env-flap-wrapper {
       position: absolute;
@@ -699,7 +723,10 @@
       <!-- Envelope body (cream rectangle) -->
       <div class="env-body"></div>
 
-      <!-- Card inside, peeking out when flap opens -->
+      <!-- Front cover (hides card when closed) -->
+      <div class="env-front-cover" id="env-front-cover"></div>
+
+      <!-- Card inside (hidden behind front cover initially) -->
       <div class="env-card" id="env-card">
         <div class="env-card-pre">con amor</div>
         <div class="env-card-rule"></div>
@@ -939,8 +966,9 @@
     // Hide button
     btn.classList.add('hide');
 
-    // Step 1 — open flap (0ms)
+    // Step 1 — open flap + reveal front cover (0ms)
     flap.classList.add('open');
+    document.getElementById('env-front-cover').classList.add('hide');
     createSparkles();
 
     // Step 2 — card rises (750ms)
